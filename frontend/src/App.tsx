@@ -1,5 +1,6 @@
 import React from "react";
 import Login from "./components/Login";
+import EmployeeLogin from "./components/EmployeeLogin";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import Employee from "./components/Employee";
@@ -20,6 +21,7 @@ function App() {
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/create" element={<AddEmployee />}></Route>
           <Route path="/employeeEdit/:id" element={<EditEmployee />}></Route>
+          <Route path="/employeeLogin" element={<EmployeeLogin />}></Route>
         </Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/start" element={<Start />}></Route>
