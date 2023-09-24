@@ -15,7 +15,7 @@ function EditEmployee() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8081/get/" + id)
+      .get("http://localhost:3000/get/" + id)
       .then((res) => {
         setData({
           ...data,
@@ -31,7 +31,7 @@ function EditEmployee() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .put("http://localhost:8081/update/" + id, data)
+      .put("http://localhost:3000/update/" + id, data)
       .then((res) => {
         if (res.data.Status === "Success") {
           navigate("/employee");
@@ -44,7 +44,7 @@ function EditEmployee() {
       <h2>Update Employee</h2>
       <form className="row g-3 w-50" onSubmit={handleSubmit}>
         <div className="col-12">
-          <label for="inputName" className="form-label">
+          <label htmlFor="inputName" className="form-label">
             Name
           </label>
           <input
@@ -58,7 +58,7 @@ function EditEmployee() {
           />
         </div>
         <div className="col-12">
-          <label for="inputEmail4" className="form-label">
+          <label htmlFor="inputEmail4" className="form-label">
             Email
           </label>
           <input
@@ -72,7 +72,7 @@ function EditEmployee() {
           />
         </div>
         <div className="col-12">
-          <label for="inputSalary" className="form-label">
+          <label htmlFor="inputSalary" className="form-label">
             Salary
           </label>
           <input
@@ -86,7 +86,7 @@ function EditEmployee() {
           />
         </div>
         <div className="col-12">
-          <label for="inputAddress" className="form-label">
+          <label htmlFor="inputAddress" className="form-label">
             Address
           </label>
           <input

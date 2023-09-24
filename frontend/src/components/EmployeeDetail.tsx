@@ -8,13 +8,13 @@ function EmployeeDetail() {
   const [employee, setEmployee] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8081/get/" + id)
+      .get("http://localhost:3000/get/" + id)
       .then((res) => setEmployee(res.data.Result[0]))
       .catch((err) => console.log(err));
   });
   const handleLogout = () => {
     axios
-      .get("http://localhost:8081/logout")
+      .get("http://localhost:3000/logout")
       .then((res) => {
         navigate("/start");
       })
@@ -24,7 +24,7 @@ function EmployeeDetail() {
     <div>
       <div className="d-flex justify-content-center flex-column align-items-center mt-3">
         <img
-          src={`http://localhost:8081/images/` + employee.image}
+          src={`http://localhost:3000/images/` + employee.image}
           alt=""
           className="empImg"
         />

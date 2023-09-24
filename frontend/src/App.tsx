@@ -1,12 +1,12 @@
 import React from "react";
-import Login from "./Login";
+import Login from "./components/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Dashboard from "./Dashboard";
-import Employee from "./Employee";
-import Profile from "./Profile";
-import Home from "./Home";
-import AddEmployee from "./AddEmployee";
-import EditEmployee from "./EditEmployee";
+import Dashboard from "./components/Dashboard";
+import Employee from "./components/Employee";
+import Profile from "./components/Profile";
+import Home from "./components/Home";
+import AddEmployee from "./components/AddEmployee";
+import EditEmployee from "./components/EditEmployee";
 import Start from "./components/Start";
 import EmployeeDetail from "./components/EmployeeDetail";
 

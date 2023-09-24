@@ -23,7 +23,7 @@ function Dashboard() {
 
   const handleLogout = () => {
     axios
-      .get("http://localhost:8081/logout")
+      .get("http://localhost:3000/logout")
       .then((res) => {
         navigate("/start");
       })

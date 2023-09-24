@@ -59,7 +59,7 @@ function Employee() {
                   <td>
                     {
                       <img
-                        src={`http://localhost:8081/images/` + employee.image}
+                        src={`http://localhost:3000/images/` + employee.image}
                         alt=""
                         className="employee_image"
                       />
