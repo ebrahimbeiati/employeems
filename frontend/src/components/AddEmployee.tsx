@@ -30,7 +30,7 @@ function AddEmployee() {
       .catch((err) => console.log(err));
   };
   return (
-    <div classNameName="d-flex flex-column align-items-center pt-4">
+    <div className="d-flex flex-column align-items-center pt-4">
       <h2>Add Employee</h2>
       <form className="row g-3 w-50" onSubmit={handleSubmit}>
         <div className="col-12">
