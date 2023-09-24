@@ -3,3 +3,9 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
+.loginForm{
+    background: rgb(24, 7, 98);
+    color: rgb(234, 225, 225);
+    border-radius: 10px;
+    padding: 20px;
+}

@@ -3,12 +3,12 @@ import '../style.css'
 
 const Login = () => {
   return (
-    <div className="d-flex justify-content-center h-screen align-items-center  vh-100 loginPage">
-      <div className="bg-white rounded-xl border w-25 p-3">
-        <h1 className="align-items-center d-flex justify-content-center">
+    <div className="d-flex justify-content-center h-screen align-items-center  vh-100 loginPage  ">
+      <div className="bg-white rounded-xl border w-25 p-3 ">
+        <h1 className="align-items-center d-flex justify-content-center loginForm">
           <b>Login</b>
         </h1>
-        <form>
+        <form className="loginForm">
           <div className="mb-3">
             <label htmlFor="email">
               <b>Email</b>
@@ -42,7 +42,8 @@ const Login = () => {
             <a href="/register">
               <button
                 className=" btn btn-success w-100 bg-yellow-500  font-bold py-2 px-4 rounded"
-                type="submit">
+                type="submit"
+              >
                 Register
               </button>
             </a>
@@ -52,7 +53,8 @@ const Login = () => {
             <a href="/forgot-password">Reset</a>
           </p>
           <p className="text-center m-1">
-            <input type="checkbox" className='m-1' />I accept all terms and policies.
+            <input type="checkbox" className="m-1" />I accept all terms and
+            policies.
           </p>
         </form>
       </div>
