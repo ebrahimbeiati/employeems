@@ -32,13 +32,13 @@ const Login = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center h-screen align-items-center vh-100 loginPage">
-      <div className="bg-white rounded-xl border w-25 p-3">
-        <h1 className="align-items-center d-flex justify-content-center loginForm">
+    <div classNameName="d-flex justify-content-center h-screen align-items-center vh-100 loginPage">
+      <div classNameName="bg-white rounded-xl border w-25 p-3">
+        <h1 classNameName="align-items-center d-flex justify-content-center loginForm">
           <b>Login</b>
         </h1>
-        <form onSubmit={handleSubmit} className="loginForm">
-          <div className="mb-3">
+        <form onSubmit={handleSubmit} classNameName="loginForm">
+          <div classNameName="mb-3">
             <label htmlFor="email">
               <b>Email</b>
             </label>
@@ -47,12 +47,12 @@ const Login = () => {
               type="email"
               id="email"
               placeholder="Enter your Email"
-              className="form-control rounded-0"
+              classNameName="form-control rounded-0"
               value={value.email}
               required
             />
           </div>
-          <div className="mb-3">
+          <div classNameName="mb-3">
             <label htmlFor="password">
               <b>Password</b>
             </label>
@@ -61,13 +61,13 @@ const Login = () => {
               type="password"
               id="password"
               placeholder="Enter your password"
-              className="form-control rounded-0"
+              classNameName="form-control rounded-0"
               value={value.password}
               required
             />
           </div>
           <button
-            className="btn btn-success w-100 bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            classNameName="btn btn-success w-100 bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded"
             type="submit"
           >
             Login
@@ -75,7 +75,7 @@ const Login = () => {
           <p>
             Don't have an account?
             <button
-              className="btn btn-success w-100 bg-yellow-500 font-bold py-2 px-4 rounded"
+              classNameName="btn btn-success w-100 bg-yellow-500 font-bold py-2 px-4 rounded"
               type="button"
               onClick={() => navigate("/register")}
             >
@@ -86,8 +86,8 @@ const Login = () => {
             Forgot password?
             <a href="/forgot-password">Reset</a>
           </p>
-          <p className="text-center m-1">
-            <input type="checkbox" className="m-1" />I accept all terms and
+          <p classNameName="text-center m-1">
+            <input type="checkbox" classNameName="m-1" />I accept all terms and
             policies.
           </p>
         </form>
