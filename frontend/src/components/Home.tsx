@@ -2,9 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 function Home() {
-  const [adminCount, setAdminCount] = useState();
-  const [employeeCount, setEmployeeCount] = useState();
-  const [salary, setSalary] = useState();
+  const [adminCount, setAdminCount] = useState(0);
+  const [employeeCount, setEmployeeCount] = useState(0);
+  const [salary, setSalary] = useState(0);
 
   useEffect(() => {
     axios
@@ -27,7 +27,10 @@ function Home() {
         setSalary(res.data[0].sumOfSalary);
       })
       .catch((err) => console.log(err));
+
+    // Fetch and set adminList here if needed
   }, []);
+
   return (
     <div>
       <div className="p-3 d-flex justify-content-around mt-3">
@@ -70,12 +73,7 @@ function Home() {
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Admin</td>
-              <td>Admin</td>
-            </tr>
-          </tbody>
+          <tbody>{/* Render the adminList here if needed */}</tbody>
         </table>
       </div>
     </div>

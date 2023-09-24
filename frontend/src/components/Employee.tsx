@@ -2,8 +2,18 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+// Define an interface for the employee object
+interface Employee {
+  id: number;
+  name: string;
+  email: string;
+  address: string;
+  salary: number;
+  image: string;
+}
+
 function Employee() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Employee[]>([]);
 
   useEffect(() => {
     axios
@@ -12,23 +22,30 @@ function Employee() {
         if (res.data.Status === "Success") {
           setData(res.data.Result);
         } else {
-          alert("Error");
+          console.error("Failed to fetch employee data");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: number) => {
     axios
       .delete("http://localhost:8081/delete/" + id)
       .then((res) => {
         if (res.data.Status === "Success") {
-          window.location.reload(true);
+          // Remove the deleted employee from the data array
+          setData((prevData) =>
+            prevData.filter((employee) => employee.id !== id)
+          );
         } else {
-          alert("Error");
+          console.error("Failed to delete employee");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
@@ -52,39 +69,35 @@ function Employee() {
             </tr>
           </thead>
           <tbody>
-            {data.map((employee, index) => {
-              return (
-                <tr key={index}>
-                  <td>{employee.name}</td>
-                  <td>
-                    {
-                      <img
-                        src={`http://localhost:3000/images/` + employee.image}
-                        alt=""
-                        className="employee_image"
-                      />
-                    }
-                  </td>
-                  <td>{employee.email}</td>
-                  <td>{employee.address}</td>
-                  <td>{employee.salary}</td>
-                  <td>
-                    <Link
-                      to={`/employeeEdit/` + employee.id}
-                      className="btn btn-primary btn-sm me-2"
-                    >
-                      edit
-                    </Link>
-                    <button
-                      onClick={(e) => handleDelete(employee.id)}
-                      className="btn btn-sm btn-danger"
-                    >
-                      delete
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            {data.map((employee) => (
+              <tr key={employee.id}>
+                <td>{employee.name}</td>
+                <td>
+                  <img
+                    src={`http://localhost:3000/images/` + employee.image}
+                    alt={employee.name}
+                    className="employee_image"
+                  />
+                </td>
+                <td>{employee.email}</td>
+                <td>{employee.address}</td>
+                <td>{employee.salary}</td>
+                <td>
+                  <Link
+                    to={`/employeeEdit/` + employee.id}
+                    className="btn btn-primary btn-sm me-2"
+                  >
+                    Edit
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(employee.id)}
+                    className="btn btn-sm btn-danger"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

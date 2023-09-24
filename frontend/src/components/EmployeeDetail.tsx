@@ -5,21 +5,38 @@ import { useNavigate, useParams } from "react-router-dom";
 function EmployeeDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [employee, setEmployee] = useState([]);
+  const [employee, setEmployee] = useState({
+    name: "",
+    email: "",
+    salary: "",
+    image: "",
+  });
+
   useEffect(() => {
     axios
-      .get("http://localhost:3000/get/" + id)
+      .get("http://localhost:8081/get/" + id) // Updated URL to match your backend
       .then((res) => setEmployee(res.data.Result[0]))
-      .catch((err) => console.log(err));
-  });
+      .catch((err) => {
+        console.error("Failed to fetch employee data:", err);
+      });
+  }, [id]);
+
   const handleLogout = () => {
     axios
-      .get("http://localhost:3000/logout")
-      .then((res) => {
+      .get("http://localhost:8081/logout") // Updated URL to match your backend
+      .then(() => {
         navigate("/start");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error("Logout error:", err);
+      });
   };
+
+  // Conditional rendering when employee data is not available yet
+  if (!employee.name) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <div className="d-flex justify-content-center flex-column align-items-center mt-3">

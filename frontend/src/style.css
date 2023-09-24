@@ -1,11 +1,24 @@
 .loginPage {
-    background: url('Image/employee.png');
-    background-size: cover;
+    background: url('Images/employee ms.jpeg');
+    background: linear-gradient(rgba(11, 11, 11, 0.5), rgba(10, 10, 10, 0.5)), url("Images/employee ms.jpeg");
+    background-position: center;
     background-repeat: no-repeat;
+    background-size: 100% 120%;
 }
-.loginForm{
-    background: rgb(24, 7, 98);
-    color: rgb(234, 225, 225);
-    border-radius: 10px;
-    padding: 20px;
+
+.loginForm {
+    background-color: rgba(1, 32, 93, 0.6);
+    color: white;
+}
+
+.employee_image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.empImg {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
 }

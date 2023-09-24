@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./style.css";
+import "../style.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -13,20 +13,25 @@ function EmployeeLogin() {
   axios.defaults.withCredentials = true;
   const [error, setError] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    axios
-      .post("http://localhost:8081/employeelogin", values)
-      .then((res) => {
-        if (res.data.Status === "Success") {
-          const id = res.data.id;
-          navigate("/employeedetail/" + id);
-        } else {
-          setError(res.data.Error);
-        }
-      })
-      .catch((err) => console.log(err));
-  };
+ const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+   event.preventDefault();
+   axios
+     .post("http://localhost:8081/employeelogin", values)
+     .then((res) => {
+       if (res.data.Status === "Success") {
+         const id = res.data.id;
+         navigate("/employeedetail/" + id);
+       } else if (res.data.Error) {
+         setError(res.data.Error);
+       } else {
+         setError("An error occurred during login.");
+       }
+     })
+     .catch((err) => {
+       console.error("Login error:", err);
+       setError("An error occurred during login.");
+     });
+ };
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 loginPage">
@@ -65,7 +70,7 @@ function EmployeeLogin() {
             {" "}
             Log in
           </button>
-          <p>You are agree to aour terms and policies</p>
+          <p>You are agreeing to our terms and policies</p>
         </form>
       </div>
     </div>
