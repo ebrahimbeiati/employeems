@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 function Dashboard() {
@@ -70,7 +71,7 @@ function Dashboard() {
               </li>
               <li>
                 <Link
-                  to="/employee"
+                  to="/employee/edit/employeeId"
                   className="nav-link px-0 align-middle text-white"
                 >
                   <i className="fs-4 bi-people"></i>{" "}

@@ -10,7 +10,7 @@ import path from "path";
 const app = express();
 
 const uri =
-  "mongodb+srv://ebrahimbeiaty:wbCZWK9RbwfHuOUu@cluster0.rplgbdj.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://ebrahimbeiaty:Ju25ZePhpK5syWln@cluster0.rplgbdj.mongodb.net/?retryWrites=true&w=majority";
 
 
 mongoose.connect(uri, {

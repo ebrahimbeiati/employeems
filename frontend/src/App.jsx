@@ -7,7 +7,7 @@ import EmployeeList from "./components/Admin/EmployeeList";
 import Profile from "./components/Profile";
 import Home from "./components/Home";
 import AddEmployee from "./components/Admin/AddEmployee";
-import EditEmployee from "./components/Admin/EditEmployee";
+import EditEmployee from "./components/Admin/EditEmployee"; // Adjust the import path as needed
 import Start from "./components/Start";
 import EmployeeDetail from "./components/employees/EmployeeDetail";
 
@@ -22,6 +22,7 @@ function App() {
           <Route path="/create" element={<AddEmployee />}></Route>
           <Route path="/employeeEdit/:id" element={<EditEmployee />}></Route>
           <Route path="/employeeLogin" element={<EmployeeLogin />}></Route>
+
         </Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/start" element={<Start />}></Route>

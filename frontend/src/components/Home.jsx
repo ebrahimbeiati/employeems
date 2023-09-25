@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
+
 function Home() {
   const [adminCount, setAdminCount] = useState(0);
   const [employeeCount, setEmployeeCount] = useState(0);

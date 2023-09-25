@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+// import "./style.css"
+
 
 // Define an interface for the employee object
 // Define an object that represents an employee
@@ -25,23 +27,7 @@ function EmployeeList() {
       });
   }, []);
 
-  const handleDelete = (id) => {
-    axios
-      .delete("http://localhost:8081/delete/" + id)
-      .then((res) => {
-        if (res.data.Status === "Success") {
-          // Remove the deleted employee from the data array
-          setData((prevData) =>
-            prevData.filter((employee) => employee.id !== id)
-          );
-        } else {
-          console.error("Failed to delete employee");
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
+
 
   return (
     <div className="px-5 py-3">
@@ -84,12 +70,7 @@ function EmployeeList() {
                   >
                     Edit
                   </Link>
-                  <button
-                    onClick={() => handleDelete(employee.id)}
-                    className="btn btn-sm btn-danger"
-                  >
-                    Delete
-                  </button>
+                
                 </td>
               </tr>
             ))}
