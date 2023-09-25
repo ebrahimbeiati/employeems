@@ -15,6 +15,8 @@ function AddEmployee() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // Send a POST request to the backend
+    
 
     // Create a FormData object and append the employee data
     const formData = new FormData();

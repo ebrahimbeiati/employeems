@@ -16,10 +16,10 @@ function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:8081/login", values)
+      .post("http://localhost:8081/employeems1", values)
       .then((res) => {
         if (res.data.Status === "Success") {
-          navigate("/");
+          navigate("/Dashboard");
         } else {
           setError(res.data.Error);
         }

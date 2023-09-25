@@ -15,19 +15,20 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Dashboard />}>
-          <Route path="" element={<Home />}></Route>
+        <Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/start" element={<Start />}></Route>
+        <Route path="/employeeLogin" element={<EmployeeLogin />}></Route>
+        </Route>
+         <Route path="/" element={<Home />}></Route>
+         <Route path="/" element={<Dashboard />}>
           <Route path="/employee" element={<EmployeeList />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/create" element={<AddEmployee />}></Route>
           <Route path="/employeeEdit/:id" element={<EditEmployee />}></Route>
           <Route path="/employeeDetail/:id" element={<EmployeeDetail />}></Route>
         </Route>
-        <Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/start" element={<Start />}></Route>
-        <Route path="/employeeLogin" element={<EmployeeLogin />}></Route>
-        </Route>
+       
       </Routes>
     </BrowserRouter>
   );

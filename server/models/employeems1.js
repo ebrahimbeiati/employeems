@@ -8,5 +8,6 @@ const userSchema = new mongoose.Schema({
   // Other user-related fields (e.g., name, email)
 });
 
-module.exports = mongoose.model("User", userSchema);
-// dXd2QBXHKqojuVn0mJz3pjaYLQGJ51ICDstKFN5vLbgaVZaSgIn1aSeiVraJzILO;
+const UserModel = mongoose.model("employeems1", userSchema);
+module.exports = UserModel;
+

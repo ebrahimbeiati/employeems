@@ -7,6 +7,11 @@ const employeeSchema = new mongoose.Schema({
   role: String,
   startTime: Date,
   endTime: Date,
+  image: String,
+  address: String,
+  salary: Number,
+  description: String
+  
 });
 
 module.exports = mongoose.model("Employee", employeeSchema);

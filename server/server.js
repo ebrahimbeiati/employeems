@@ -6,6 +6,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import multer from "multer";
 import path from "path";
+import UserModel from "./models/employeems1";
 
 const app = express();
 
@@ -49,13 +50,6 @@ const employeeSchema = new mongoose.Schema({
   image: String,
 });
 
-//mongourl
-
-
-
-
-
-
 const Employee = mongoose.model("Employee", employeeSchema);
 
 const storage = multer.diskStorage({
@@ -75,10 +69,9 @@ const upload = multer({
 });
 
 app.get("/getEmployee", (req, res) => {
-  Employee.find({}, (err, result) => {
-    if (err) return res.json({ Error: "Get employee error in MongoDB" });
-    return res.json({ Status: "Success", Result: result });
-  });
+  UserModel.find()
+  .then(employeems1=>res.json(employeems1))
+  .catch(err=>console.log(err))
 });
 
 app.get("/get/:id", (req, res) => {
@@ -210,9 +203,7 @@ app.post("/create", upload.single("image"), (req, res) => {
       name: req.body.name,
       email: req.body.email,
       password: hash,
-      address: req.body.address,
       salary: req.body.salary,
-      image: req.file.filename,
     });
 
     employee.save((err, result) => {
