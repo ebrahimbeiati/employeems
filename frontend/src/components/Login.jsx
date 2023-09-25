@@ -63,7 +63,6 @@ function Login() {
           <button type="submit" className="btn btn-success w-100 rounded-0">
             Log in
           </button>
-          <p>You agree to our terms and policies</p>
         </form>
 
         {/* Move the following part inside the form */}

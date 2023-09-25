@@ -12,13 +12,13 @@ function Start() {
             className="btn btn-primary btn-lg"
             onClick={() => navigate("/employeeLogin")}
           >
-            Employee
+            Admin
           </button>
           <button
             className="btn btn-success btn-lg"
             onClick={() => navigate("/login")}
           >
-            Admin
+            Employee
           </button>
         </div>
       </div>

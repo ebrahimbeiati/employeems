@@ -30,7 +30,7 @@ function AddEmployee() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8081/create",
+        "http://localhost:5173/create",
         formData
       );
       if (response.data.Status === "Success") {
@@ -84,7 +84,9 @@ const handleImageChange = (e) => {
             onChange={handleImageChange} // Handle image change
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary"
+
+        >
           Add Employee
         </button>
       </form>

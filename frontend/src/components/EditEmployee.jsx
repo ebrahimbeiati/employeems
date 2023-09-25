@@ -14,7 +14,7 @@ function EditEmployee() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/get/" + id)
+      .get("http://localhost:5173/get/" + id)
       .then((res) => {
         if (res.data.Status === "Success" && res.data.Result.length > 0) {
           const employeeData = res.data.Result[0];

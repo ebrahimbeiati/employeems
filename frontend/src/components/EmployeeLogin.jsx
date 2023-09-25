@@ -3,35 +3,29 @@ import "../style.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function EmployeeLogin() {
+function Login() {
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
-  axios.defaults.withCredentials = true;
+
   const navigate = useNavigate();
   axios.defaults.withCredentials = true;
   const [error, setError] = useState("");
 
- const handleSubmit = (event) => {
-   event.preventDefault();
-   axios
-     .post("http://localhost:8081/employeelogin", values)
-     .then((res) => {
-       if (res.data.Status === "Success") {
-         const id = res.data.id;
-         navigate("/employeedetail/" + id);
-       } else if (res.data.Error) {
-         setError(res.data.Error);
-       } else {
-         setError("An error occurred during login.");
-       }
-     })
-     .catch((err) => {
-       console.error("Login error:", err);
-       setError("An error occurred during login.");
-     });
- };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axios
+      .post("http://localhost:8081/login", values)
+      .then((res) => {
+        if (res.data.Status === "Success") {
+          navigate("/");
+        } else {
+          setError(res.data.Error);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 loginPage">
@@ -67,14 +61,32 @@ function EmployeeLogin() {
             />
           </div>
           <button type="submit" className="btn btn-success w-100 rounded-0">
-            {" "}
             Log in
           </button>
-          <p>You are agreeing to our terms and policies</p>
         </form>
+
+        {/* Move the following part inside the form */}
+        <p>
+          Don't have an account?
+          <button
+            className="btn btn-success w-100 bg-yellow-500 font-bold py-2 px-4 rounded"
+            type="button"
+            onClick={() => navigate("/register")}
+          >
+            Register
+          </button>
+        </p>
+        <p>
+          Forgot password?
+          <a href="/forgot-password">Reset</a>
+        </p>
+        <p className="text-center m-1">
+          <input type="checkbox" className="m-1" />I accept all terms and
+          policies.
+        </p>
       </div>
     </div>
   );
 }
 
-export default EmployeeLogin;
+export default Login;
