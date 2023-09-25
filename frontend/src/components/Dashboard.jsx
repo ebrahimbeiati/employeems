@@ -1,35 +1,45 @@
-import React, { useEffect } from "react";
-import "bootstrap-icons/font/bootstrap-icons.css";
+import React, { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Dashboard() {
+  const [ setUserData] = useState(null);
   const navigate = useNavigate();
-  axios.defaults.withCredentials = true;
-  useEffect(() => {
-    axios.get("http://localhost:8081/dashboard").then((res) => {
-      if (res.data.Status === "Success") {
-        if (res.data.role === "admin") {
-          navigate("/");
-        } else {
-          const id = res.data.id;
-          navigate("/employeedetail/" + id);
-        }
-      } else {
+
+  const handleLogout = () => {
+    axios
+      .get("/logout")
+      .then(() => {
         navigate("/start");
+      })
+      .catch((err) => {
+        console.error("Logout error:", err);
+      });
+  };
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get("http://localhost:8081/dashboard");
+        if (response.data.Status === "Success") {
+          if (response.data.role === "admin") {
+            navigate("/");
+          } else {
+            const id = response.data.id;
+            navigate(`/employeedetail/${id}`);
+          }
+          setUserData(response.data);
+        } else {
+          navigate("/start");
+        }
+      } catch (error) {
+        console.error("Dashboard data fetch error:", error);
+        // Handle errors or display an error message to the user
       }
-    });
-  }, []);
+    }
 
-const handleLogout = () => {
-  axios
-    .get("/logout") // Use the relative route
-    .then((res) => {
-      navigate("/start");
-    })
-    .catch((err) => console.log(err));
-};
-
+    fetchData();
+  }, [navigate]);
 
   return (
     <div className="container-fluid">

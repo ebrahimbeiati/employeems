@@ -25,7 +25,7 @@ function Employee() {
       });
   }, []);
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (id) => {
     axios
       .delete("http://localhost:8081/delete/" + id)
       .then((res) => {

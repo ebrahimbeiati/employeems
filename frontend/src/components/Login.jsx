@@ -1,99 +1,93 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import "../style.css";
+import React, { useState } from 'react'
+import '../style.css'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
-const Login = () => {
-  const [value, setValue] = useState({
+function Login() {
+  const [values, setValues] = useState({
     email: "",
     password: "",
   });
+
   const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
-    // Add type annotation here
-    e.preventDefault();
-    console.log(value);
-
+  const handleSubmit = (event) => {
+    event.preventDefault();
     axios
-      .post("http://localhost:3000/login", value)
+      .post("http://localhost:8081/login", values)
       .then((res) => {
-        console.log(res);
-        alert("Login Success");
-        // Clear the form
-        setValue({ email: "", password: "" });
-        // Redirect to another page (e.g., dashboard)
-        navigate("/dashboard");
+        if (res.data.Status === "Success") {
+          navigate("/");
+        } else {
+          setError(res.data.Error);
+        }
       })
-      .catch((err) => {
-        console.log(err);
-        alert("Login failed. Please check your credentials.");
-      });
+      .catch((err) => console.log(err));
   };
 
   return (
-    <div className="d-flex justify-content-center h-screen align-items-center vh-100 loginPage">
-      <div className="bg-white rounded-xl border w-25 p-3">
-        <h1 className="align-items-center d-flex justify-content-center loginForm">
-          <b>Login</b>
-        </h1>
-        <form onSubmit={handleSubmit} className="loginForm">
+    <div className="d-flex justify-content-center align-items-center vh-100 loginPage">
+      <div className="p-3 rounded w-25 border loginForm">
+        <div className="text-danger">{error && error}</div>
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="email">
-              <b>Email</b>
+              <strong>Email</strong>
             </label>
             <input
-              onChange={(e) => setValue({ ...value, email: e.target.value })}
               type="email"
-              id="email"
-              placeholder="Enter your Email"
+              placeholder="Enter Email"
+              name="email"
+              onChange={(e) => setValues({ ...values, email: e.target.value })}
               className="form-control rounded-0"
-              value={value.email}
-              required
+              autoComplete="off"
             />
           </div>
           <div className="mb-3">
             <label htmlFor="password">
-              <b>Password</b>
+              <strong>Password</strong>
             </label>
             <input
-              onChange={(e) => setValue({ ...value, password: e.target.value })}
               type="password"
-              id="password"
-              placeholder="Enter your password"
+              placeholder="Enter Password"
+              name="password"
+              onChange={(e) =>
+                setValues({ ...values, password: e.target.value })
+              }
               className="form-control rounded-0"
-              value={value.password}
-              required
             />
           </div>
-          <button
-            className="btn btn-success w-100 bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            type="submit"
-          >
-            Login
+          <button type="submit" className="btn btn-success w-100 rounded-0">
+            Log in
           </button>
-          <p>
-            Don't have an account?
-            <button
-              className="btn btn-success w-100 bg-yellow-500 font-bold py-2 px-4 rounded"
-              type="button"
-              onClick={() => navigate("/register")}
-            >
-              Register
-            </button>
-          </p>
-          <p>
-            Forgot password?
-            <a href="/forgot-password">Reset</a>
-          </p>
-          <p className="text-center m-1">
-            <input type="checkbox" className="m-1" />I accept all terms and
-            policies.
-          </p>
+          <p>You agree to our terms and policies</p>
         </form>
+
+        {/* Move the following part inside the form */}
+        <p>
+          Don't have an account?
+          <button
+            className="btn btn-success w-100 bg-yellow-500 font-bold py-2 px-4 rounded"
+            type="button"
+            onClick={() => navigate("/register")}
+          >
+            Register
+          </button>
+        </p>
+        <p>
+          Forgot password?
+          <a href="/forgot-password">Reset</a>
+        </p>
+        <p className="text-center m-1">
+          <input type="checkbox" className="m-1" />I accept all terms and
+          policies.
+        </p>
       </div>
     </div>
   );
-};
+}
 
 export default Login;
