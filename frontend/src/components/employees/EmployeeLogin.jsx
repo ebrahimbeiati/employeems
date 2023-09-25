@@ -3,12 +3,12 @@ import './../../style.css'; // Adjust the path to point to your style.css file
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function EmployeeLogin() {
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
-
+  axios.defaults.withCredentials = true;
   const navigate = useNavigate();
   axios.defaults.withCredentials = true;
   const [error, setError] = useState("");
@@ -16,10 +16,11 @@ function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:8081/login", values)
+      .post("http://localhost:8081/employeelogin", values)
       .then((res) => {
         if (res.data.Status === "Success") {
-          navigate("/employeedetail");
+          const id = res.data.id;
+          navigate("/employeedetail/" + id);
         } else {
           setError(res.data.Error);
         }
@@ -61,32 +62,14 @@ function Login() {
             />
           </div>
           <button type="submit" className="btn btn-success w-100 rounded-0">
+            {" "}
             Log in
           </button>
+          <p>You are agree to aour terms and policies</p>
         </form>
-
-        {/* Move the following part inside the form */}
-        <p>
-          Don't have an account?
-          <button
-            className="btn btn-success w-100 bg-yellow-500 font-bold py-2 px-4 rounded"
-            type="button"
-            onClick={() => navigate("/register")}
-          >
-            Register
-          </button>
-        </p>
-        <p>
-          Forgot password?
-          <a href="/forgot-password">Reset</a>
-        </p>
-        <p className="text-center m-1">
-          <input type="checkbox" className="m-1" />I accept all terms and
-          policies.
-        </p>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default EmployeeLogin;
