@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 
 
-function Employee() {
+function EmployeeList() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -60,7 +60,7 @@ function Employee() {
               <th>Email</th>
               <th>Address</th>
               <th>Salary</th>
-              <th>Action</th>
+              <th>Role</th>
             </tr>
           </thead>
           <tbody>
@@ -100,4 +100,4 @@ function Employee() {
   );
 }
 
-export default Employee;
+export default EmployeeList;
