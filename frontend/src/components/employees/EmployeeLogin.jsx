@@ -19,7 +19,7 @@ function Login() {
       .post("http://localhost:8081/login", values)
       .then((res) => {
         if (res.data.Status === "Success") {
-          navigate("/EmployeeDetail");
+          navigate("/employeedetail");
         } else {
           setError(res.data.Error);
         }

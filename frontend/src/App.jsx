@@ -21,13 +21,13 @@ function App() {
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/create" element={<AddEmployee />}></Route>
           <Route path="/employeeEdit/:id" element={<EditEmployee />}></Route>
-          <Route path="/employeeLogin" element={<EmployeeLogin />}></Route>
-
+          <Route path="/employeeDetail/:id" element={<EmployeeDetail />}></Route>
         </Route>
+        <Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/start" element={<Start />}></Route>
-        {/* <Route path="/employeeLogin" element={<EmployeeLogin />}></Route> */}
-        <Route path="/employeedetail/:id" element={<EmployeeDetail />}></Route>
+        <Route path="/employeeLogin" element={<EmployeeLogin />}></Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   );
