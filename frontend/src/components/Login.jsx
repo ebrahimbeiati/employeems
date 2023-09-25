@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../style.css";
@@ -10,7 +10,7 @@ const Login = () => {
   });
   const navigate = useNavigate();
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e) => {
     // Add type annotation here
     e.preventDefault();
     console.log(value);

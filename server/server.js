@@ -8,6 +8,24 @@ import multer from "multer";
 import path from "path";
 
 const app = express();
+
+const uri =
+  "mongodb+srv://ebrahimbeiaty:wbCZWK9RbwfHuOUu@cluster0.rplgbdj.mongodb.net/?retryWrites=true&w=majority";
+
+
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+db.once("open", () => {
+  console.log("Connected to MongoDB");
+});
+
+
 app.use(
   cors({
     origin: ["http://localhost:5173"],
@@ -20,20 +38,6 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to MongoDB using your provided URL
-const mongoURI =
-  "mongodb+srv://ebrahimbeiaty:ebrahim12345@cluster0.rplgbdj.mongodb.net/?retryWrites=true&w=majority";
-
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-const db = mongoose.connection;
-
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
-db.once("open", () => {
-  console.log("Connected to MongoDB");
-});
 
 // Define a MongoDB schema and model for the "employee" collection
 const employeeSchema = new mongoose.Schema({
@@ -44,6 +48,13 @@ const employeeSchema = new mongoose.Schema({
   salary: Number,
   image: String,
 });
+
+//mongourl
+
+
+
+
+
 
 const Employee = mongoose.model("Employee", employeeSchema);
 

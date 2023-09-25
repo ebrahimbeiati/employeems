@@ -3,17 +3,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 // Define an interface for the employee object
-interface Employee {
-  id: number;
-  name: string;
-  email: string;
-  address: string;
-  salary: number;
-  image: string;
-}
+// Define an object that represents an employee
+
+
 
 function Employee() {
-  const [data, setData] = useState<Employee[]>([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     axios

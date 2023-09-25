@@ -13,7 +13,7 @@ function EmployeeLogin() {
   axios.defaults.withCredentials = true;
   const [error, setError] = useState("");
 
- const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+ const handleSubmit = (event) => {
    event.preventDefault();
    axios
      .post("http://localhost:8081/employeelogin", values)

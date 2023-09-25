@@ -9,28 +9,29 @@ function AddEmployee() {
     password: "",
     address: "",
     salary: "",
-    image: null, // Initialize image as null
+    image: null,
   });
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formdata = new FormData();
-    formdata.append("name", data.name);
-    formdata.append("email", data.email);
-    formdata.append("password", data.password);
-    formdata.append("address", data.address);
-    formdata.append("salary", data.salary);
+
+    // Create a FormData object and append the employee data
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    formData.append("address", data.address);
+    formData.append("salary", data.salary);
 
     if (data.image !== null) {
-      // Only append the image if it's not null
-      formdata.append("image", data.image);
+      formData.append("image", data.image);
     }
 
     try {
       const response = await axios.post(
         "http://localhost:8081/create",
-        formdata
+        formData
       );
       if (response.data.Status === "Success") {
         navigate("/employee");
@@ -42,10 +43,14 @@ function AddEmployee() {
     }
   };
 
-  const handleImageChange = (event) => {
+const handleImageChange = (e) => {
+  if (e.target.files) {
     // Handle changes to the image input field
-    setData({ ...data, image: event.target.files[0] });
-  };
+    setData({ ...data, image: e.target.files[0] });
+  } else {
+    // Handle the case where no file is selected
+  }
+};
 
   return (
     <div className="d-flex flex-column align-items-center pt-4">
