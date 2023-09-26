@@ -280,11 +280,22 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import multer from "multer";
 import path from "path";
+import EmployeeModel from "./models/Employee";
+import AdminModel from "./models/Admin";
+
 
 const app = express();
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    credentials: true,
 
+  })
+);
+app.use(express.json());
 const uri =
-  "mongodb+srv://ebrahimbeiaty:jt6qZPh1l7XInYZ6@cluster0.rplgbdj.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://ebrahimbeiaty:k3Udcr7L6BGPrV3v@cluster0.rplgbdj.mongodb.net/Employee-MS";
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
@@ -309,16 +320,8 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.static("public"));
 
-const employeeSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  password: String,
-  address: String,
-  salary: Number,
-  image: String,
-});
 
-const Employee = mongoose.model("User", employeeSchema);
+
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -410,72 +413,21 @@ app.get("/salary", async (req, res) => {
   }
 });
 
-app.post("/admin/login", async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const admin = await Employee.findOne({ email, role: "admin" });
-
-    if (!admin) {
-      return res.json({ Status: "Error", Error: "Admin does not exist" });
-    }
-
-    const isPasswordCorrect = await bcrypt.compare(password, admin.password);
-
-    if (!isPasswordCorrect) {
-      return res.json({ Status: "Error", Error: "Incorrect password" });
-    }
-
-    const token = jwt.sign(
-      { role: "admin", id: admin._id },
-      process.env.JWT_SECRET_KEY, // Use environment variable for the secret key
-      {
-        expiresIn: "1d",
-      }
-    );
-
-    res.cookie("token", token);
-    return res.json({ Status: "Success", role: "admin", id: admin._id });
-  } catch (error) {
-    console.log(error);
-    return res
-      .status(500)
-      .json({ Status: "Error", Error: "Internal server error" });
-  }
+app.post("/adminLogin", (req, res) => {
+  AdminModel.create(req.body)
+    .then(admins => res.json(admins))
+    .catch(err => res.json(err))
 });
+
+  
 
 // Employee login route
-app.post("/employee/login", async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const employee = await Employee.findOne({ email, role: "employee" });
-
-    if (!employee) {
-      return res.json({ Status: "Error", Error: "Employee does not exist" });
-    }
-
-    const isPasswordCorrect = await bcrypt.compare(password, employee.password);
-
-    if (!isPasswordCorrect) {
-      return res.json({ Status: "Error", Error: "Incorrect password" });
-    }
-
-    const token = jwt.sign(
-      { role: "employee", id: employee._id },
-      process.env.JWT_SECRET_KEY, // Use environment variable for the secret key
-      {
-        expiresIn: "1d",
-      }
-    );
-
-    res.cookie("token", token);
-    return res.json({ Status: "Success", role: "employee", id: employee._id });
-  } catch (error) {
-    console.log(error);
-    return res
-      .status(500)
-      .json({ Status: "Error", Error: "Internal server error" });
-  }
+app.post("/employeeLogin", (req, res) => {
+  EmployeeModel.create(req.body)
+  .then(employees=>res.json(employees))
+  .catch(err => res.json(err))
 });
+
 
 
 app.get("/logout", (req, res) => {

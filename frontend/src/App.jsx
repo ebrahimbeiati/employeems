@@ -36,6 +36,7 @@
 
 // export default App;
 import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import EmployeeList from "./components/EmployeeList";
@@ -45,15 +46,14 @@ import AddEmployee from "./components/AddEmployee";
 import EditEmployee from "./components/EditEmployee";
 import Start from "./components/Start";
 import EmployeeDetail from "./components/EmployeeDetail";
-import Login from "./components/Login";
 import EmployeeLogin from "./components/EmployeeLogin";
+import AdminLogin from "./components/AdminLogin";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Define the common route for dashboard and its child routes */}
-        <Route path="/" element={<Dashboard />}>
+        <Route path="/dashboard" element={<Dashboard />}>
           {/* Dashboard is the default child route */}
           <Route path="/" element={<Home />} />
 
@@ -66,7 +66,7 @@ function App() {
         </Route>
 
         {/* Define separate routes for login and start pages */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/adminLogin" element={<AdminLogin />} />
         <Route path="/start" element={<Start />} />
         <Route path="/employeeLogin" element={<EmployeeLogin />} />
       </Routes>

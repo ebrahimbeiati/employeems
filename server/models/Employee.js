@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const employeeSchema = new mongoose.Schema({
   name: String,
   email: String,
+  password: String,
   role: String,
   startTime: Date,
   endTime: Date,
@@ -14,7 +15,7 @@ const employeeSchema = new mongoose.Schema({
   
 });
 
-module.exports = mongoose.model("Employee", employeeSchema);
-
+const EmployeeModel = mongoose.model("employees", employeeSchema)
+module.exports = EmployeeModel
 
 

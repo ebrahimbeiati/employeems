@@ -2,29 +2,21 @@ import React, { useState } from "react";
 import '../style.css'; // Adjust the path to point to your style.css file
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import{ Link} from "react-router-dom"
 
-const Login = () => {
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-  });
+const AdminLogin = () => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-const response = await axios.post("http://localhost:8081/admin/login", values);
-      if (response.data.Status === "Success") {
-        // If login is successful, navigate to the Dashboard
-        navigate("/dashboard");
-      } else {
-        setError(response.data.Error);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8081/adminLogin", { email, password })
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -41,8 +33,7 @@ const response = await axios.post("http://localhost:8081/admin/login", values);
               type="email"
               placeholder="Enter Email"
               name="email"
-              value={values.email}
-              onChange={(e) => setValues({ ...values, email: e.target.value })}
+              onChange={(e) => setEmail({ email: e.target.value })}
               className="form-control rounded-0"
               autoComplete="off"
               required
@@ -56,17 +47,16 @@ const response = await axios.post("http://localhost:8081/admin/login", values);
               type="password"
               placeholder="Enter Password"
               name="password"
-              value={values.password}
               onChange={(e) =>
-                setValues({ ...values, password: e.target.value })
+                setPassword({ password: e.target.value })
               }
               className="form-control rounded-0"
               required
             />
           </div>
-          <button type="submit" className="btn btn-success w-100 rounded-0">
+          <Link  to={'/dashboard'} type="submit" className="btn btn-success w-100 rounded-0">
             Log in
-          </button>
+          </Link>
         </form>
 
         <p>
@@ -92,7 +82,7 @@ const response = await axios.post("http://localhost:8081/admin/login", values);
   );
 };
 
-export default Login;
+export default AdminLogin;
 // import React, { useState } from "react";
 // import '../style.css'; // Adjust the path to point to your style.css file
 // import axios from "axios";
