@@ -37,16 +37,16 @@
 // export default App;
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Dashboard from "./components/Admin/Dashboard";
-import EmployeeList from "./components/Admin/EmployeeList";
+import Dashboard from "./components/Dashboard";
+import EmployeeList from "./components/EmployeeList";
 import Profile from "./components/Profile";
 import Home from "./components/Home";
-import AddEmployee from "./components/Admin/AddEmployee";
-import EditEmployee from "./components/Admin/EditEmployee";
+import AddEmployee from "./components/AddEmployee";
+import EditEmployee from "./components/EditEmployee";
 import Start from "./components/Start";
-import EmployeeDetail from "./components/employees/EmployeeDetail";
+import EmployeeDetail from "./components/EmployeeDetail";
 import Login from "./components/Login";
-import EmployeeLogin from "./components/employees/EmployeeLogin";
+import EmployeeLogin from "./components/EmployeeLogin";
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-// import "./style.css"
+import "../style.css"
 
 
 // Define an interface for the employee object

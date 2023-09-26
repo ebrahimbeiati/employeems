@@ -410,71 +410,73 @@ app.get("/salary", async (req, res) => {
   }
 });
 
-app.post("/login", async (req, res) => {
+app.post("/admin/login", async (req, res) => {
   try {
-    // Get the user's email and password from the request body
-    const email = req.body.email;
-    const password = req.body.password;
+    const { email, password } = req.body;
+    const admin = await Employee.findOne({ email, role: "admin" });
 
-    // Debugging: Log the received email and password
-    console.log("Received email:", email);
-    console.log("Received password:", password);
-
-    // Query the MongoDB database for the user with the specified email
-    const user = await Employee.findOne({ email });
-
-    // Debugging: Log the user data from MongoDB
-    console.log("User from MongoDB:", user);
-
-    // Rest of the authentication logic...
-  } catch (error) {
-    console.log(error);
-    return res.json({ Status: "Error", Error: "Something went wrong" });
-  }
-});
-
-
-app.post("/employeelogin", async (req, res) => {
-  try {
-    // Get the user's email and password from the request body
-    const email = req.body.email;
-    const password = req.body.password;
-
-    // Query the MongoDB database for the user with the specified email
-    const employee = await Employee.findOne({ email });
-
-    // If the user does not exist, return an error message
-    if (!employee) {
-      return res.json({ Status: "Error", Error: "User does not exist" });
+    if (!admin) {
+      return res.json({ Status: "Error", Error: "Admin does not exist" });
     }
 
-    // Compare the user's password to the hashed password in the database
-    const isPasswordCorrect = await bcrypt.compare(password, employee.password);
+    const isPasswordCorrect = await bcrypt.compare(password, admin.password);
 
-    // If the password is incorrect, return an error message
     if (!isPasswordCorrect) {
       return res.json({ Status: "Error", Error: "Incorrect password" });
     }
 
-    // Generate a JWT token for the user
     const token = jwt.sign(
-      { role: "employee", id: employee._id },
-      "jwt-secret-key",
+      { role: "admin", id: admin._id },
+      process.env.JWT_SECRET_KEY, // Use environment variable for the secret key
       {
         expiresIn: "1d",
       }
     );
 
-    // Set the JWT token as a cookie in the user's browser
     res.cookie("token", token);
-
-    // Return a successful response
-    return res.json({ Status: "Success", id: employee._id });
+    return res.json({ Status: "Success", role: "admin", id: admin._id });
   } catch (error) {
     console.log(error);
-    return res.json({ Status: "Error", Error: "Something went wrong" });
+    return res
+      .status(500)
+      .json({ Status: "Error", Error: "Internal server error" });
   }
 });
+
+// Employee login route
+app.post("/employee/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const employee = await Employee.findOne({ email, role: "employee" });
+
+    if (!employee) {
+      return res.json({ Status: "Error", Error: "Employee does not exist" });
+    }
+
+    const isPasswordCorrect = await bcrypt.compare(password, employee.password);
+
+    if (!isPasswordCorrect) {
+      return res.json({ Status: "Error", Error: "Incorrect password" });
+    }
+
+    const token = jwt.sign(
+      { role: "employee", id: employee._id },
+      process.env.JWT_SECRET_KEY, // Use environment variable for the secret key
+      {
+        expiresIn: "1d",
+      }
+    );
+
+    res.cookie("token", token);
+    return res.json({ Status: "Success", role: "employee", id: employee._id });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ Status: "Error", Error: "Internal server error" });
+  }
+});
+
 
 app.get("/logout", (req, res) => {
   res.clearCookie("token");

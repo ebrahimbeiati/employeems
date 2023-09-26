@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import "../style.css";
 
 import axios from "axios";
 
@@ -27,7 +28,7 @@ function Dashboard() {
             navigate("/");
           } else {
             const id = response.data.id;
-            navigate(`/employeedetail/${id}`);
+            navigate(`/employee/${id}`);
           }
           setUserData(response.data);
         } else {
