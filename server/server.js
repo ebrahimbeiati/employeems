@@ -318,7 +318,7 @@ const employeeSchema = new mongoose.Schema({
   image: String,
 });
 
-const Employee = mongoose.model("Employee", employeeSchema);
+const Employee = mongoose.model("User", employeeSchema);
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
