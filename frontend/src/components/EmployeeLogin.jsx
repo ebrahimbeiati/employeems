@@ -16,7 +16,7 @@ function EmployeeLogin() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:8081/employeelogin", values)
+      .post("http://localhost:8081/register", values)
       .then((res) => {
         if (res.data.Status === "Success") {
           const id = res.data.id;
@@ -65,7 +65,7 @@ function EmployeeLogin() {
             {" "}
             Log in
           </button>
-          <p>You are agree to aour terms and policies</p>
+          <p>You are agree to our terms and policies</p>
         </form>
       </div>
     </div>
