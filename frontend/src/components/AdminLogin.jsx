@@ -14,7 +14,7 @@ const AdminLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8081/adminLogin", { email, password })
+      .post("http://localhost:3001/employee/login", { email, password })
       .then((result) => console.log(result))
       .catch((err) => console.log(err));
   };
@@ -47,28 +47,19 @@ const AdminLogin = () => {
               type="password"
               placeholder="Enter Password"
               name="password"
-              onChange={(e) =>
-                setPassword({ password: e.target.value })
-              }
+              onChange={(e) => setPassword({ password: e.target.value })}
               className="form-control rounded-0"
               required
             />
           </div>
-          <Link  to={'/dashboard'} type="submit" className="btn btn-success w-100 rounded-0">
+          <Link
+            to={"/employee"}
+            type="submit"
+            className="btn btn-success w-100 rounded-0"
+          >
             Log in
           </Link>
         </form>
-
-        <p>
-          Don't have an account?
-          <button
-            className="btn btn-success w-100 bg-yellow-500 font-bold py-2 px-4 rounded"
-            type="button"
-            onClick={() => navigate("/register")}
-          >
-            Register
-          </button>
-        </p>
         <p>
           Forgot password?
           <a href="/forgot-password">Reset</a>

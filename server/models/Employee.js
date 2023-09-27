@@ -1,21 +1,10 @@
-// models/Employee.js
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const employeeSchema = new mongoose.Schema({
-  name: String,
+const EmployeeSchema = new mongoose.Schema({
   email: String,
   password: String,
-  role: String,
-  startTime: Date,
-  endTime: Date,
-  image: String,
-  address: String,
-  salary: Number,
-  description: String
-  
 });
 
-const EmployeeModel = mongoose.model("employees", employeeSchema)
-module.exports = EmployeeModel
+const EmployeeModel = mongoose.model("employees", EmployeeSchema);
 
-
+export default EmployeeModel;

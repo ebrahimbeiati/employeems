@@ -10,7 +10,7 @@ function Start() {
         <div className="d-flex justify-content-between mt-5">
           <button
             className="btn btn-primary btn-lg"
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/adminLogin")}
           >
             Admin
           </button>

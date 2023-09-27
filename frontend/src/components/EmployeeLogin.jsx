@@ -13,10 +13,13 @@ function EmployeeLogin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-     axios.post("http://localhost:8081/employeeLogin",{email,password})
-     .then(result =>console.log(result))
-     .catch(err => console.log(err))
+    axios
+      .post("http://localhost:3001/register", { email, password })
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
   };
+
+
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 loginPage">
@@ -32,7 +35,7 @@ function EmployeeLogin() {
               type="email"
               placeholder="Enter Email"
               name="email"
-              onChange={(e)=>setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               className="form-control rounded-0"
               autoComplete="off"
             />
@@ -45,16 +48,11 @@ function EmployeeLogin() {
               type="password"
               placeholder="Enter Password"
               name="password"
-              onChange={(e) =>
-                setPassword( e.target.value )
-              }
+              onChange={(e) => setPassword(e.target.value)}
               className="form-control rounded-0"
             />
           </div>
-          <Link
-            to={"/employeeDetail/:id"}
-            className="btn btn-success w-100 rounded-0"
-          >
+          <Link to={"/profile"} className="btn btn-success w-100 rounded-0">
             {" "}
             Log in
           </Link>
