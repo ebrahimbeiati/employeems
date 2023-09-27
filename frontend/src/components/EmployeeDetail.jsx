@@ -5,43 +5,26 @@ import { useNavigate, useParams } from "react-router-dom";
 function EmployeeDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [employee, setEmployee] = useState({
-    name: "",
-    email: "",
-    salary: "",
-    image: "",
-  });
-
+  const [employee, setEmployee] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8081/get/" + id) // Updated URL to match your backend
+      .get("http://localhost:8081/get/" + id)
       .then((res) => setEmployee(res.data.Result[0]))
-      .catch((err) => {
-        console.error("Failed to fetch employee data:", err);
-      });
-  }, [id]);
-
+      .catch((err) => console.log(err));
+  });
   const handleLogout = () => {
     axios
-      .get("http://localhost:8081/logout") // Updated URL to match your backend
-      .then(() => {
+      .get("http://localhost:8081/logout")
+      .then((res) => {
         navigate("/start");
       })
-      .catch((err) => {
-        console.error("Logout error:", err);
-      });
+      .catch((err) => console.log(err));
   };
-
-  // Conditional rendering when employee data is not available yet
-  if (!employee.name) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div>
       <div className="d-flex justify-content-center flex-column align-items-center mt-3">
         <img
-          src={`http://localhost:3000/images/` + employee.image}
+          src={`http://localhost:8081/images/` + employee.image}
           alt=""
           className="empImg"
         />
@@ -49,7 +32,6 @@ function EmployeeDetail() {
           <h3>Name: {employee.name}</h3>
           <h3>Email: {employee.email}</h3>
           <h3>Salary: {employee.salary}</h3>
-          <h3>Role:{employee.role}</h3>
         </div>
         <div>
           <button className="btn btn-primary me-2">Edit</button>

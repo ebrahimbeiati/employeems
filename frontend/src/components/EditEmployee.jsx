@@ -27,24 +27,6 @@ function EditEmployee() {
       })
       .catch((err) => console.log(err));
   }, []);
-   const handleDelete = (id) => {
-     axios
-       .delete("http://localhost:8081/delete/" + id)
-       .then((res) => {
-         if (res.data.Status === "Success") {
-           // Remove the deleted employee from the data array
-           setData((prevData) =>
-             prevData.filter((employee) => employee.id !== id),
-             navigate("/EmployeeList")
-           );
-         } else {
-           console.error("Failed to delete employee");
-         }
-       })
-       .catch((err) => {
-         console.error(err);
-       });
-   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -52,7 +34,7 @@ function EditEmployee() {
       .put("http://localhost:8081/update/" + id, data)
       .then((res) => {
         if (res.data.Status === "Success") {
-          navigate("/EmployeeList");
+          navigate("/employee");
         }
       })
       .catch((err) => console.log(err));
@@ -120,12 +102,6 @@ function EditEmployee() {
         <div class="col-12">
           <button type="submit" class="btn btn-primary">
             Update
-          </button>
-          <button
-            onClick={() => handleDelete(id)}
-            className="btn btn-sm btn-danger"
-          >
-            Delete
           </button>
         </div>
       </form>
