@@ -63,7 +63,7 @@ function Login() {
             {" "}
             Log in
           </button>
-          <p>You are agree to aour terms and policies</p>
+          <p>You are agree to our terms and policies</p>
         </form>
       </div>
     </div>
